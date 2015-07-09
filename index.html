@@ -6,8 +6,6 @@
           
         window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        // loop through array and insert div
             
             for (var i = 0; i < window.geemails.length; i++) {
     
@@ -19,6 +17,23 @@
         
             }
         
+        var count = document.getElementById("count");
+        var inboxCount = window.geemails.length;
+        var counter = document.createTextNode(inboxCount);
+        count.appendChild(counter);
+        
+            function onInterval(){
+                var newMessage = getNewMessage();
+                var email = drawMessage(newMessage)
+                var element = document.getElementById("inbox");
+                element.insertBefore(email, inbox.childNodes[0]);  // http://www.w3schools.com/dom/prop_element_firstchild.asp
+                inboxCount++
+                count.innerHTML = inboxCount;
+                console.log(email);
+   
+            }
+        
+        setInterval(onInterval, 5000);
             
         }
             
@@ -26,8 +41,6 @@
                 //make a row in the table
                 var block = document.createElement("td")
                 // use text argument as text that goes inside the table cell
-                // assign classString to the div
-                // print div instead of 2 strings
                 var blockText = document.createTextNode(text);
                 block.className += classString; 
                 block.appendChild(blockText);   
@@ -68,6 +81,8 @@
 			<header id='mast'>
 				
 				<h1>GeeMail
+
+                    <span id='count'></span>
 
                 </h1>
 
