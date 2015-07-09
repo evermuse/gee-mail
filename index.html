@@ -5,74 +5,79 @@
         <script>
           
         window.onload = function(){
-        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
+        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE.    
             
-            for (var i = 0; i < window.geemails.length; i++) {
-    
+            for (var i = 0; i < window.geemails.length; i++) {  // for the length of the array...
             
-                var email = drawMessage(window.geemails[i])
-                var element = document.getElementById("inbox");  // selects the inbox
-                element.appendChild(email); // puts emails in the inbox
+                var email = drawMessage(window.geemails[i])      // create a random message using drawMessage()
+                var element = document.getElementById("inbox");  // select the inbox
+                element.appendChild(email); // adds created email div to the inbox section of the page
                 console.log(window.geemails[i]);
         
             }
         
-        var count = document.getElementById("count");
-        var inboxCount = window.geemails.length;
-        var counter = document.createTextNode(inboxCount);
-        count.appendChild(counter);
+        var count = document.getElementById("count"); // selects the count tag
+        var inboxCount = window.geemails.length; // sets the initial count
+        var counter = document.createTextNode(inboxCount); // creates the text node
+        count.appendChild(counter); // places the count on the page
         
             function onInterval(){
-                var newMessage = getNewMessage();
-                var email = drawMessage(newMessage)
-                var element = document.getElementById("inbox");
-                element.insertBefore(email, inbox.childNodes[0]);  // http://www.w3schools.com/dom/prop_element_firstchild.asp
-                inboxCount++
-                count.innerHTML = inboxCount;
-                console.log(email);
+                var newMessage = getNewMessage(); // grabs new random message
+                var email = drawMessage(newMessage) // 
+                var element = document.getElementById("inbox"); 
+                element.insertBefore(email, inbox.childNodes[0]); // prepends the new message to the top of the inbox
+                
+                inboxCount++ // iterates the count
+                count.innerHTML = inboxCount; // prints new count
+                console.log(email); 
    
             }
         
-        setInterval(onInterval, 5000);
+        setInterval(onInterval, 5000); // sets the new message spawn time
+
             
         }
             
-            function drawBlock(text, classString) {
-                //make a row in the table
-                var block = document.createElement("td")
-                // use text argument as text that goes inside the table cell
-                var blockText = document.createTextNode(text);
+            function drawBlock(text, classString) { // block draw function
+                
+                var block = document.createElement("div") // creates a cell div in the row
+                var blockText = document.createTextNode(text); // use text argument as text that goes inside the cell
                 block.className += classString; 
-                block.appendChild(blockText);   
+                block.appendChild(blockText);  
                 //print 
-                return block
+                return block // returns block to drawMessage()
             };
             
 
             function drawMessage(data){
-               
-                var email = document.createElement("tr")              
-                var date = drawBlock(data["date"], "date") 
-                var sender = drawBlock(data["sender"], "sender")
-                var subject = drawBlock(data["subject"], "subject")
-                var body = drawBlock(data["body"], "body hideblock")
+
+                var email = document.createElement("div") // creates an email div          
                 
-                email.className += 'email'; 
-                email.appendChild(sender);
-                email.appendChild(subject);
-                email.appendChild(date);
-                email.appendChild(body);
-                email.addEventListener("click", function(){ 
+                // following code uses drawBlock() to create constituent divs of text data
+                var date = drawBlock(data["date"], "date") // draws date block and adds date class
+                var sender = drawBlock(data["sender"], "sender") // draws sender block and adds sender class
+                var subject = drawBlock(data["subject"], "subject") // draws subject block and adds subject class
+                var contents = drawBlock(data["body"], "contents")  // draws contents block and adds contents class from body data
+                
+                email.className += 'email'; // adds email class for css to email
+                email.appendChild(sender); // adds sender div to email
+                email.appendChild(subject); // adds subject div to email
+                email.appendChild(date);  // adds date div to email
+                email.appendChild(contents); // adds content div to email
+                email.addEventListener("click", function(){  // adds event listener for click
                     console.log(this)
-                    var q = this.getElementsByClassName("last");
-                    q[0].classList.toggle('hideblock');
+                    var q = this.getElementsByClassName("contents"); // grabs just the selected messages's contents div
+                    q[0].classList.toggle('hideContents'); // allows for hiding of content again
                     console.log(body);
                 })
-                return email
+                
+                return email // returns email div to the main function
             
-            };
+            }; 
+
 
         </script>
+
 	</head>
 
 	<body>
@@ -80,24 +85,16 @@
 			
 			<header id='mast'>
 				
-				<h1>GeeMail
+				<h1>GeeMail -
 
                     <span id='count'></span>
 
                 </h1>
 
-			</header>
+			</header>  
 
-            <section id='sidebar'>
+			<section id='inbox'>
 
-            </section>  
-
-			<section id='inboxView'>
-
-                <table id='inbox'>
-                    
-
-                </table>
 
 			</section>
 

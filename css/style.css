@@ -1,10 +1,16 @@
 /* mast */
 
-#mast		{background-color: gray; color:white; padding: 10 0 10 0;}
-#mast h1	{text-align: center;}
+#mast			{background-color: gray; color:white; padding: 10 0 10 0;}
+#mast h1		{text-align: center;}
+#count			{font-style: italic;}
 
 /* content */
 
-#sidebar	{display: block; width: 50;}
+.email			{padding: 5 0 0 0;border: 1px solid gray;	}
 
-#inbox		{	}
+.sender			{display: inline-block; width: 150px; padding: 0 0 5 5; 	}
+.subject		{display: inline-block; width: 400px; padding: 0 0 5 0;	}
+.date			{display: inline-block; float: right; padding: 0 5 5 0;	text-align: left;}
+
+.contents 		{display: none; border-top: 1px dotted gray; padding: 5 5 5 5;}
+.hideContents 	{display: block;}
