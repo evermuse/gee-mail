@@ -2,17 +2,90 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
-    <script>
-      window.onload = function(){
+        <script>
+          
+        window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+        // loop through array and insert div
+            
+            for (var i = 0; i < window.geemails.length; i++) {
+    
+            
+                var email = drawMessage(window.geemails[i])
+                var element = document.getElementById("inbox");  // selects the inbox
+                element.appendChild(email); // puts emails in the inbox
+                console.log(window.geemails[i]);
         
-      };
-    </script>
+            }
+        
+            
+        }
+            
+            function drawBlock(text, classString) {
+                //make a row in the table
+                var block = document.createElement("td")
+                // use text argument as text that goes inside the table cell
+                // assign classString to the div
+                // print div instead of 2 strings
+                var blockText = document.createTextNode(text);
+                block.className += classString; 
+                block.appendChild(blockText);   
+                //print 
+                return block
+            };
+            
+
+            function drawMessage(data){
+               
+                var email = document.createElement("tr")              
+                var date = drawBlock(data["date"], "date") 
+                var sender = drawBlock(data["sender"], "sender")
+                var subject = drawBlock(data["subject"], "subject")
+                var body = drawBlock(data["body"], "body hideblock")
+                
+                email.className += 'email'; 
+                email.appendChild(sender);
+                email.appendChild(subject);
+                email.appendChild(date);
+                email.appendChild(body);
+                email.addEventListener("click", function(){ 
+                    console.log(this)
+                    var q = this.getElementsByClassName("last");
+                    q[0].classList.toggle('hideblock');
+                    console.log(body);
+                })
+                return email
+            
+            };
+
+        </script>
 	</head>
+
 	<body>
 		<div class="container" id="main">
-			Build Me!
+			
+			<header id='mast'>
+				
+				<h1>GeeMail
+
+                </h1>
+
+			</header>
+
+            <section id='sidebar'>
+
+            </section>  
+
+			<section id='inboxView'>
+
+                <table id='inbox'>
+                    
+
+                </table>
+
+			</section>
+
 		</div>
 	</body>
 </html>
